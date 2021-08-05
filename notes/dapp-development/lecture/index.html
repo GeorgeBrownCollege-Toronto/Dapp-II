@@ -3,7 +3,7 @@
     <head>
 		<meta charset="utf-8">
 
-		<title>DApp Development</title>
+		<title>DApp Development - I</title>
 
 		<meta name="description" content="A lesson on DApp development">
 		<meta name="author" content="Dhruvin Parikh">
@@ -93,8 +93,8 @@
 				<section data-markdown>
 					<textarea data-template>
 						### BCDV 1014 - DAPP II 
-						#### DApp Development
-						<div class="author">Dhruvin Parikh, April 2021</div>
+						#### DApp Development - I
+						<div class="author">Dhruvin Parikh, August 2021</div>
 					</textarea>
 				</section>
 		
@@ -103,9 +103,7 @@
                 * Developer environment setup
                 * Create smart contract shells
                 * Creating and Preparing test suites
-                * Continuous Integration setup
-                * Front end creation
-                * Containerization of DApp
+                * Creating Open APIs using subgraph
                 </textarea></section>
 
                 <section data-markdown><textarea data-template>
@@ -299,80 +297,32 @@
                 </textarea></section>
 
                 <section data-markdown><textarea data-template>
-                ### CI/CD Platform
-                * Drone
-                * Travis
-                * Jenkins
-                * GitLab
-                * Circle
-                * Codeship
-                </textarea></section>
+                  ### The graph protocol
+                  * Indexing protocol for querying networks like Ethereum and IPFS
+                  * App needs indexed data in order to load quickly
+                  * Data is spread across blockchains and storage networks
+                  * A subgraph defines how to efficiently index data in a deterministic way
+                  </textarea></section>
 
-                <section data-markdown><textarea data-template>
-                ### GitHub Actions
-                *GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.*
-                <br/><a href="https://github.com/features/actions" target="_blank">https://github.com/features/actions</a>
-                </textarea></section>
+                  <section data-markdown><textarea data-template>
+                    ### The graph tokens
+                    * Indexes
+                     * Indexers take $GRT for economic security of queries
+                     * Earn query fees in ETH or DAI
+                    * Curators
+                     * Curators stake GRT to signal quality and integrity of subgraphs
+                     * Receive curation shares on a bonding curve for GRT staked
+                    </textarea></section>
 
-                <section data-markdown><textarea data-template>
-                ### GitHub Actions Workflow
-                `EVENT => TRIGGER => DO SOMETHING`
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Triggers
-                * Push
-                * Pull Request
-                * Create tag
-                * create branch
-                * Issue comment created
-                * Issue labeled applied
-                * Issue is opened
-                * Make private repo public
-                * Scheduled
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Using Github actions
-                * Your pipeline is where you put your code
-                * It's closer to the configuration 
-                * Potentially faster (benchmarks pending)
-                * One place to debug 
-                * Customize to application requirements
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Configuration
-                * Create a new file in `.github/workflows` directory named `[any-name].yml` 
-                * Add a workflow code in YAML syntax
-                * It is recommended to create the files related to GitHub actions workflows directly on GitHub 
-                * Enable Github actions repository if it is not already enabled 
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Secrets in GitHub actions
-                * Goto to `Settings => Secrets`
-                * Add a new secret as a key-value pair
-                * In the pipeline, access secrets using `${{secrets.KEY_NAME}}`
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Front-end frameworks
-                * React
-                * Vue.js
-                * Next.js
-                * Gatsby
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Front-end libraries
-                * @web3-react/core
-                * @web3-react/injected-connector
-                * @web3-react/network-connector
-                * @web3-react/walletconnect-connector
-                * ethers.js or web3.js
-                * bignumber.js
-                </textarea></section>
+                    <section data-markdown><textarea data-template>
+                      ### Creating a subgraph
+                      * Initialize a new subgraph
+                      * Define data sources you would like to index (smart contract address)
+                      * Define the entities you would like to index
+                      * Define the data model in GRAPHQL
+                      * Configure Assemblyscript mappings
+                      * Deploy
+                      </textarea></section>
 
                 <section data-markdown><textarea data-template>
                 ### Review project structure
@@ -390,178 +340,12 @@
                 * <a href="https://github.com/nomiclabs/hardhat-hackathon-boilerplate" target="_blank">Hardhat Hackathon boilerplate</a>
                 </textarea></section>
 
-                <section data-markdown><textarea data-template>
-                ### Dockerfile Basics
-                * Docker Images are built from a base image.
-                * Base Images are built up using simple instructions such as
-                * Run a command.
-                * Add a file or directory.
-                * Create an environment variable.
-                * What process to run when launching a container from this image.
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Dockerfile Sample
-                ```
-                FROM tomcat:7.0.63-jre8
-                MAINTAINER Jeff Ellin jeff.ellin
-                ENV CORE_SQL_URL "jdbc:postgresql"
-                ENV CORE_SQL_USERNAME "tamr"
-                ENV CORE_SQL_PASSWORD "12345"
-                # Enable use fo gui admin tool
-                add tomcat-users.xml $CATALINA_HOME
-                # add the tamr war
-                add tamr.war /tamr/tamr.war
-                add catalina.sh $CATALINA_HOME
-                RUN mv /tamr/*.war $CATALINA_HOME
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Docker Images
-                * Docker images are read only templates from which containers are launched from
-                * Each image consists of a series of layers using the union file system
-                * When you change an image a new layer is created.
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `FROM`
-                * `FROM` instruction sets the Base Image for subsequent instructions. 
-                * A valid Dockerfile has `FROM` as its first instruction. 
-                * The image can be any valid image – it is especially easy to start by pulling an image from the public repositories.
-                ```
-                FROM node:latest
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `ENV`
-                * The ENV instruction is useful for providing required environment variables specific to services you wish to containerize, such as Postgres’s PGDATA.
-                ```
-                ENV TOMCAT_MAJOR 8
-                ENV TOMCAT_VERSION 8.0.26
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `RUN`
-                * The RUN instruction will execute any commands in a new layer on top of the current image and commit the results. 
-                * The resulting committed image will be used for the next step in the Dockerfile.
-                ```
-                RUN apt-get update && apt-get install -y \ bzr \
-                cvs \ git \ mercurial \
-                subversion
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `ADD and COPY`
-                * The `ADD` and `COPY` commands can be used to add files to the container.
-                  * For Add if source file is a tar file the file will be extracted. 
-                  * Add allows source file to be a URL
-                  * Use a trailing slash to indicate a directory vs a file.
-                ```
-                COPY hom* /mydir/ # adds all files starting with "hom"
-                COPY hom?.txt /mydir/ # ? is replaced with any single char
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `EXPOSE`
-                * The `EXPOSE` instructions informs Docker that the container will listen on the specified network ports at runtime. 
-                * Docker uses this information to interconnect containers using links and to determine which ports to expose to the host when using the `-P` flag.
-                ```
-                EXPOSE 8080
-                ```
-                </textarea></section>
-
-
-                <section data-markdown><textarea data-template>
-                ### `WORKDIR`
-                * The `WORKDIR` instruction sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile.
-                * It can be used multiple times in the one Dockerfile. If a relative path is provided, it will be relative to the path of the previous WORKDIR instruction.
-                ```
-                WORKDIR /app
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `CMD`
-                * The main purpose of a CMD is to provide defaults for an executing container.
-                * Can be overridden with arguments to docker run 
-                ```
-                CMD ["start.sh", "run"]
-                ```
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### `VOLUME`
-                * Docker volumes are containers for data. 
-                * Can be shared between containers
-                * Can be mapped to specific directories on the host.
-                * By Default removing the container does not remove the volume. (can lead to disk wastage due to orphaning volumes)
-                * Data outside of a volume is kept in the union file system and is lost when the container is deleted.                         
-                </textarea></section>
-
-
-                <section data-markdown><textarea data-template>
-                ### Building an Image (1/2)
-                * A Dockerfile contains a set of instructions for building image. 
-                * The Dockerfile can be used to generate an image stored system locally.
-                * Docker daemon does actual build process. 
-                * Contents of current context (folder) is sent to the daemon.                
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Building an Image (2/2)
-                * Reduce build overhead by using `.dockerignore` files.
-                * Each Instruction creates a new layer in the image. 
-                * The cache from previous builds is used as much as possible.
-                ```
-                docker build -t dhruvingbc/survey-reward-dapp:latest
-                ```
-                </textarea></section>
-
-
-                <section data-markdown><textarea data-template>
-                ### Deploying an image
-                * In order to share your image you can push it to a Docker Repository. Images can then be pulled from another host.
-                * Use the internal docker registry for private images.
-                * Use Docker Hub for public images.
-                ```
-                docker tag dhruvingbc/survey-reward-dapp:latest 
-                     dhruvingbc/survey-reward-dapp:latest 
-                docker push dhruvingbc/survey-reward-dapp:latest
-                docker pull dhruvingbc/survey-reward-dapp:latest
-                ```              
-                </textarea></section>
-
-
-                <section data-markdown><textarea data-template>
-                ### Docker Best Practices (1/2)
-                * Avoid adding unnecessary files to your image
-                * Don’t run apt-update on a single line. 
-                * This will cause caching issues if the referenced archive gets updated, which will make your subsequent `apt-get install` fail without comment.
-                * Avoid installing unnecessary packages
-                * Always use version tags in FROM statements. 
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
-                ### Docker Best Practices (2/2)
-                * Avoid `:latest`
-                * Avoid run + commit, use a Dockerfile instead
-                * Installing ssh into a container is not clever One Process per container
-                * Leverage and understand the cache                             
-                </textarea></section>
-
                 <section>
                     <h3>References</h3>
                     <ul>
                         <li><a href="https://docs.openzeppelin.com/openzeppelin/" target="_blank">OpenZeppelin docs</a></li>
                         <li><a href="https://hardhat.org/getting-started/" target="_blank">Hardhat Docs</a></li>
-                        <li><a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows" target="_blank">Github Action triggers</a></li>
-                        <li><a href="https://docs.docker.com/engine/reference/builder/" target="_blank">Dockerfile reference</a></li>
-                        <li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank">Docker best practices</a></li>
+                        <li><a href="https://thegraph.com/docs/developer/quick-start" target="_blank">The graph protocol</a></li>
                     </ul>
                 </section>
 
