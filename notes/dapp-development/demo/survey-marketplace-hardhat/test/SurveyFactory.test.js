@@ -1,5 +1,4 @@
 const { expect } = require("chai");
-const {expectRevert} = require("@openzeppelin/test-helpers");
 
 describe("SurveyFactory", () => {
 
@@ -48,7 +47,7 @@ describe("SurveyFactory", () => {
 
         //test case #4
         it("Should not allow the factory owner to call createSurvey()", async () => {
-            await expect(surveyFactory.createSurvey({value:"2000000000000000000"})).to.be.reverted;
+            await expect(surveyFactory.connect(factoryOwner).createSurvey({value:"2000000000000000000"})).to.be.reverted;
         })
     })
 })
