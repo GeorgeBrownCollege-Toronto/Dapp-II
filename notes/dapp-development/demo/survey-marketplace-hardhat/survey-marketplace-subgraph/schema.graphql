@@ -1,0 +1,19 @@
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type SurveyCreated @entity {
+  id: ID!
+  owner: Bytes! # address
+  surveyId: BigInt! # uint256
+  surveyAddress: Bytes! # address
+  createdAtTimeStamp: BigInt!
+  createdAtBlock: BigInt!
+}
+
+type SurveyFactoryInitialized @entity {
+  id: ID!
+  surveyCreationFees: BigInt! # uint256
+}
