@@ -163,14 +163,6 @@
                 </textarea></section>
 
                 <section data-markdown><textarea data-template>
-                ### Front-end frameworks
-                * React
-                * Vue.js
-                * Next.js
-                * Gatsby
-                </textarea></section>
-
-                <section data-markdown><textarea data-template>
                 ### Dockerfile Basics
                 * Docker Images are built from a base image.
                 * Base Images are built up using simple instructions such as
@@ -302,6 +294,57 @@
                 ```
                 </textarea></section>
 
+                <section data-markdown><textarea data-template>
+                  ### What is `docker compose` ?
+                  * A tool for defining and running multi-container docker applications
+                  * With `compose` use a `yaml` file to configure application's services
+                  * `compose` works in all environments: production, staging, testing as well as CI workflows
+                  * With a single command you can create and start all services from configuration
+                </textarea></section>
+
+                <section data-markdown><textarea data-template>
+                ### Multi container application
+                * Define muti-container app in `compose.yml` file
+                * Single command to deploy entire app
+                * Handle container dependencies
+                * Works with Docker Swarm, Networking, Volumes, Universal Control Plane
+                </textarea></section>
+
+                <section data-markdown><textarea data-template>
+                ### Steps for docker compose
+                1. Define app's environment with a docker file
+                2. Define the services that make up your app in docker compose file
+                3. Run the cli : `docker compose up`
+                </textarea></section>
+
+                <section data-markdown><textarea data-template>
+                  ### Smart Contract environment
+                  ```
+                  version: '3.5'
+                  services:
+                    contracts-env:
+                      env_file:
+                        - .env
+                      build:
+                        context: ./
+                      working_dir: /src
+                      command: npm run run-env
+                      volumes:
+                        - ./:/src
+                      environment:
+                        MNEMONIC: ${MNEMONIC}
+                        ETHERSCAN_KEY: ${ETHERSCAN_KEY}
+                        INFURA_KEY: ${INFURA_KEY}
+                  ```
+                  </textarea></section>
+
+                  <section data-markdown><textarea data-template>
+                    ### Building blocks of docker compose
+                    * Services
+                    * Volumes
+                    * Networking
+                    </textarea></section>
+
 
                 <section data-markdown><textarea data-template>
                 ### Deploying an image
@@ -337,9 +380,12 @@
                 <section>
                     <h3>References</h3>
                     <ul>
+                        <li><a href="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions" target="_blank">Workflow syntax</a></li>
                         <li><a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows" target="_blank">Github Action triggers</a></li>
                         <li><a href="https://docs.docker.com/engine/reference/builder/" target="_blank">Dockerfile reference</a></li>
                         <li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank">Docker best practices</a></li>
+                        <li a href="https://www.slideshare.net/ajeetraina/introduction-to-docker-compose-210321942" target="_blank">Introduction to Docker compose</li>
+                        <li> <a href="https://dockerlabs.collabnix.com/intermediate/workshop/" target="_blank">Docker labs for practice</a></li>
                     </ul>
                 </section>
 
