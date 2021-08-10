@@ -7,7 +7,12 @@ on:
   push:
     branches:
       - master
-      
+
+defaults:
+  run:
+    shell: bash
+    working-directory: './notes/dapp-development/demo/survey-marketplace-hardhat'
+
 jobs:
   Install-Compile-Lint-Test-Deploy:
     runs-on: ubuntu-latest
@@ -19,7 +24,6 @@ jobs:
       INFURA_KEY: ${{ secrets.INFURA_KEY }}
       MNEMONIC: ${{ secrets.MNEMONIC }}
       ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
-      PROJECT_PATH: './notes/dapp-development/demo/survey-marketplace-hardhat'
     
     steps:
       - uses: actions/checkout@v2
@@ -32,27 +36,21 @@ jobs:
         id: cache
         with:
           path: ~/.npm
-          working-directory: ${{ env.PROJECT_PATH }} 
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Installing Dependencies
-        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           npm ci
       - name: Lint
-        working-directory: ${{ env.PROJECT_PATH }}
         run: |
          npm run lint
       - name: Compile
-        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           npm run compile
       - name: Test
-        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           npm run test
       - name: Rinkeby Deployment
-        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           npm run deploy:rinkeby
