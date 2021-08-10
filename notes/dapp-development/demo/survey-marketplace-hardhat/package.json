@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "run-env": "npm i && tail -f /dev/null",
+    "hardhat:rinkeby": "hardhat --network rinkeby",
+    "survey:rinkeby:full:migration": "npm run compile && npm run hardhat:rinkeby -- deploy-surveyfactory",
     "test": "hardhat test",
-    "compile": "hardhat compile",
+    "compile": "SKIP_LOAD=true hardhat compile",
     "lint": "hardhat check",
     "lint:fix": "solhint ./contracts/*.sol --fix",
-    "deploy:rinkeby": "hardhat run scripts/deploy.js --network rinkeby"
+    "deploy:rinkeby": "hardhat run scripts/deploy.js --network rinkeby",
+    "hardhat": "hardhat"
   },
   "keywords": [],
   "author": "",
