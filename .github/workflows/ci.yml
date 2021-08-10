@@ -1,0 +1,51 @@
+name: Survey Marketplace Install, Compile, Lint, Test and Deploy 
+
+on: 
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+      
+jobs:
+  Install-Compile-Lint-Test-Deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.0.0]
+        
+    env:
+      INFURA_KEY: ${{ secrets.INFURA_KEY }}
+      MNEMONIC: ${{ secrets.MNEMONIC }}
+      ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: cache
+          with:
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
+      - name: Installing Dependencies
+        run: |
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm ci
+      - name: Lint
+        run: |
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm run lint
+      - name: Compile
+        run: |
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm run compile
+      - name: Test
+        run: |
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ npm run test
+      - name: Rinkeby Deployment
+        run: |
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ npm run deploy:rinkeby
