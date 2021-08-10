@@ -22,7 +22,7 @@ describe("SurveyFactory", () => {
 
     describe("test cases for createSurvey()", () => {
         //test case #1
-        it("Should be able to get survey Id and survey address of survey creator", async () => {
+        it.only("Should be able to get survey Id and survey address of survey creator", async () => {
             const tx = await surveyFactory.connect(surveyOwner).createSurvey(
                 { value: "2000000000000000000" });
             const receipt = await tx.wait();
