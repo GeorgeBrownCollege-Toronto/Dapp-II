@@ -45,7 +45,7 @@ jobs:
           cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm run compile
       - name: Test
         run: |
-          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ npm run test
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm run test
       - name: Rinkeby Deployment
         run: |
-          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ npm run deploy:rinkeby
+          cd ./notes/dapp-development/demo/survey-marketplace-hardhat/ && npm run deploy:rinkeby
