@@ -1,0 +1,11 @@
+# folders
+artifacts/
+build/
+cache/
+coverage/
+dist/
+lib/
+node_modules/
+
+# files
+coverage.json
