@@ -33,7 +33,11 @@ task("deploy-surveyfactory", "deploys the survey factory contract")
 
     if (verify) {
       console.log("2. Verifying contracts");
+<<<<<<< HEAD
       await delay(6000);
+=======
+      await delay(3000);
+>>>>>>> 4c56ab81d66dcc236afbbd4200092e51d1f1eca6
       await hre.run("verify:verify", {
         address: surveyFactory.address,
         constructorArguments: [fees.toString()],
