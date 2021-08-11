@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/dhruvin/gbc/bcdv-1014/Dapp-II/notes/dapp-development/demo/survey-marketplace-hardhat/contracts/SurveyFactory.sol": {
+    "/src/contracts/SurveyFactory.sol": {
       "lastModificationDate": 1628641192593,
       "contentHash": "fc2036521979b29ce2204c4446b9101b",
       "sourceName": "contracts/SurveyFactory.sol",
@@ -24,9 +24,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -41,7 +38,7 @@
         "SurveyFactory"
       ]
     },
-    "/Users/dhruvin/gbc/bcdv-1014/Dapp-II/notes/dapp-development/demo/survey-marketplace-hardhat/contracts/TrustedSurvey.sol": {
+    "/src/contracts/TrustedSurvey.sol": {
       "lastModificationDate": 1628641192626,
       "contentHash": "35f732c1de6af9c38d8c485569279d5f",
       "sourceName": "contracts/TrustedSurvey.sol",
@@ -64,9 +61,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -78,7 +72,7 @@
         "TrustedSurvey"
       ]
     },
-    "/Users/dhruvin/gbc/bcdv-1014/Dapp-II/notes/dapp-development/demo/survey-marketplace-hardhat/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+    "/src/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
       "lastModificationDate": 1628205196071,
       "contentHash": "4fe56b59ced59d87df6b796758f62895",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
@@ -101,9 +95,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -117,7 +108,7 @@
         "Ownable"
       ]
     },
-    "/Users/dhruvin/gbc/bcdv-1014/Dapp-II/notes/dapp-development/demo/survey-marketplace-hardhat/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+    "/src/node_modules/@openzeppelin/contracts/utils/Context.sol": {
       "lastModificationDate": 1628205195375,
       "contentHash": "07f148e0d44b2ffc23b3ae6dd6e38cfb",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
@@ -140,9 +131,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
