@@ -7,7 +7,6 @@
     "/contracts"
   ],
   "scripts": {
-    "prepare": "husky install",
     "run-env": "npm i && tail -f /dev/null",
     "hardhat:rinkeby": "hardhat --network rinkeby",
     "survey:rinkeby:full:migration": "npm run compile && npm run hardhat:rinkeby -- deploy-surveyfactory",
