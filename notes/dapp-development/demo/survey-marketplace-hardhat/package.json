@@ -3,16 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "files": [
+    "/contracts"
+  ],
   "scripts": {
+    "prepare": "husky install",
     "run-env": "npm i && tail -f /dev/null",
     "hardhat:rinkeby": "hardhat --network rinkeby",
     "survey:rinkeby:full:migration": "npm run compile && npm run hardhat:rinkeby -- deploy-surveyfactory",
     "test": "hardhat test",
     "compile": "SKIP_LOAD=true hardhat compile",
-    "lint": "hardhat check",
+    "lint": "npm run lint:sol && npm run lint:ts && npm run prettier:list-different",
+    "lint:sol": "solhint --config ./.solhint.json --max-warnings 0 \"contracts/**/*.sol\"",
+    "lint:ts": "eslint --config ./.eslintrc.yaml --ignore-path ./.eslintignore --ext .js,.ts",
     "lint:fix": "solhint ./contracts/*.sol --fix",
     "deploy:rinkeby": "hardhat run scripts/deploy.js --network rinkeby",
-    "hardhat": "hardhat"
+    "hardhat": "hardhat",
+    "prettier": "prettier --config ./.prettier.yaml --write \"**/*.{js,json,md,sol,ts}\"",
+    "prettier:list-different": "prettier --config ./.prettier.yaml --list-different \"**/*.{js,json,md,sol,ts}\"",
+    "clean": "hardhat clean",
+    "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"test/**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -25,12 +35,32 @@
     "@openzeppelin/test-helpers": "^0.5.12",
     "chai": "^4.3.4",
     "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.4",
     "hardhat": "^2.5.0",
-    "solhint": "^3.3.6"
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.17",
+    "shelljs": "^0.8.4",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "0.0.5",
+    "solidity-coverage": "^0.7.16"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.2.0"
+  },
+  "lint-staged": {
+    "./contracts/**/*.sol": [
+      "npm run lint:sol --quiet"
+    ],
+    "./(test|tasks|scripts)/**/*.{ts,js,json}": [
+      "npm run lint:ts --quiet"
+    ],
+    "./(test|tasks|scripts|contracts)/**/*.{sol,md,ts,js,json}": [
+      "npm run prettier:list-different --loglevel warn"
+    ]
   }
 }

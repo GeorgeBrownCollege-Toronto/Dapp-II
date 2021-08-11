@@ -5,8 +5,7 @@ pragma solidity 0.8.0;
 /// @title A survey contract
 /// @author Dhruvin
 /// @notice Initializes the survey
-contract TrustedSurvey{
-
+contract TrustedSurvey {
     /// @notice address of the survey owner
     address public owner;
 
