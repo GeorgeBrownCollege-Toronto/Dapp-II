@@ -8,7 +8,7 @@ contract Lottery {
 	// the timestamp of the drawing event
 	uint public drawing;
 	// the price of the ticket in DAI (100 DAI)
-	uint ticketPrice = 100e18;
+	uint ticketPrice = 100 ether;
 
     // 2. Purchasing
 	address[] public purchaserIndexes;

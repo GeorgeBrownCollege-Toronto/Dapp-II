@@ -9,7 +9,7 @@ contract CollateralGroup {
 	IERC20 dai = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);
 	IERC20 aDai = IERC20(0x028171bCA77440897B824Ca71D1c56caC55b68A3); 
 
-	uint depositAmount = 10000e18;
+	uint depositAmount = 10000 ether;
 	address[] members;
     // 7. Security
     mapping(address => bool) permittedMembers;
@@ -46,7 +46,7 @@ contract CollateralGroup {
         
         // 6. Health Factor
         (,,,,,uint256 healthFactor) = pool.getUserAccountData(address(this));
-        require(healthFactor > 2e18);
+        require(healthFactor > 2 ether);
 
         IERC20(asset).transfer(msg.sender, amount);
         

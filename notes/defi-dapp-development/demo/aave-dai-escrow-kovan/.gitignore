@@ -7,3 +7,5 @@ artifacts
 .parcel-cache
 
 .env
+
+dist/
