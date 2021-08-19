@@ -1,20 +1,22 @@
 import { useState, useEffect, useRef, Suspense } from "react";
 import { Button, Box } from "@chakra-ui/core";
-import { ListItem, UnorderedList } from "@chakra-ui/react"
+import { ListItem, UnorderedList, InputGroup, InputLeftAddon, Input, InputRightAddon, Stack } from "@chakra-ui/react"
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import { useQueryParameters } from "../hooks/useQueryParamters";
-import {useSurveyFactoryOwner} from "../hooks/useSurveyFactoryOwner";
-import {useSurveyCreationFees} from "../hooks/useSurveyCreationFees";
-import {useCreateSurvey} from "../hooks/useCreateSurvey";
-import {useSurveys} from "../hooks/useSurveys"
+import { useSurveyFactoryOwner } from "../hooks/useSurveyFactoryOwner";
+import { useSurveyCreationFees } from "../hooks/useSurveyCreationFees";
+import { useCreateSurvey } from "../hooks/useCreateSurvey";
+import { useSurveys, useSurveyOwners, useSurveyRewards } from "../hooks/useSurveys"
 import { QueryParameters } from "../constants";
 import { getNetwork, injected } from "../connectors";
 import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useETHBalance } from "../hooks/useETHBalance";
 import { TokenAmount } from "@uniswap/sdk"
-import { formatUnits } from "@ethersproject/units"
+import { formatUnits, parseEther, parseUnits } from "@ethersproject/units"
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber"
+
 
 function ETHBalance(): JSX.Element {
     const { account } = useWeb3React();
@@ -29,30 +31,51 @@ function ETHBalance(): JSX.Element {
 }
 
 function Survey(): JSX.Element {
-    const {data: surveyFactoryOwner} = useSurveyFactoryOwner(true);
-    const {data: surveyCreationFee} = useSurveyCreationFees(true);
-    const createSurvey = useCreateSurvey(true); 
-    const {data:surveys} = useSurveys(true)
-    
+    const [reward, setReward] = useState("0.001")
+    const { data: surveyFactoryOwner } = useSurveyFactoryOwner(true);
+    const { data: surveyCreationFee } = useSurveyCreationFees(true);
+    const createSurvey = useCreateSurvey(BigNumber.from(surveyCreationFee).add(parseUnits(reward)), true);
+    const { data: surveys } = useSurveys(true)
+    const surveyOwners = useSurveyOwners(surveys, false)
+    const surveyRewards = useSurveyRewards(surveys, false)
+
+
     const handleCreateSurvey = async () => {
         await createSurvey()
     }
 
     return (
-        <div>
+        <>
             <p>Survey Factory Owner : {surveyFactoryOwner}</p>
             <p>Survey Creation Fee : {formatUnits(surveyCreationFee)} ETH</p>
-            <Button onClick = {handleCreateSurvey} >Create Survey</Button>
+            <Stack spacing={4}>
+                <InputGroup>
+                    <InputLeftAddon children="Survey Reward" />
+                    <Input type="text" placeholder="Reward" value={reward} onChange={(event) => {
+                        setReward(event.target.value)
+                    }} />
+                    <InputRightAddon children="ETH" />
+                </InputGroup>
+            </Stack>
+            <Button onClick={handleCreateSurvey} >Create Survey</Button>
             <p>List Of Surveys</p>
             <UnorderedList>
-            {surveys.map((survey:string,index:number) => <ListItem key={index}>{survey}</ListItem>)}
+                {surveys.map((survey: string, index: number) => <ListItem key={index}>{survey}</ListItem>)}
             </UnorderedList>
-        </div>
+            <p>Survey Owner</p>
+            <UnorderedList>
+                {surveyOwners.map((surveyOwner: string, index: number) => <ListItem key={index}>{surveyOwner}</ListItem>)}
+            </UnorderedList>
+            <p>Survey Rewards</p>
+            <UnorderedList>
+                {surveyRewards.map((surveyReward: string, index: number) => <ListItem key={index}>{`${surveyReward} ETH`}</ListItem>)}
+            </UnorderedList>
+        </>
     );
 }
 
 export default function Account({
-    triedToEagerConnect,
+    triedToEagerConnect
 }: {
     triedToEagerConnect: boolean;
 }): JSX.Element | null {
@@ -153,7 +176,7 @@ export default function Account({
             }
         >
             <ETHBalance />
-            <Survey/>
+            <Survey />
         </Suspense>
     );
 }
