@@ -23,7 +23,7 @@ const abi = require('./abi.json');
 
 // 3. Destruct
 describe("Pool", function () {
-    let contract;
+    let attackerAddressProvider;
     let pool;
     before(async () => {
         pool = await ethers.getContractAt(abi, "0x987115C38Fd9Fd2aA2c6F1718451D167c13a3186");
@@ -32,9 +32,9 @@ describe("Pool", function () {
         let exploit = await Destructor.deploy();
         await exploit.deployed();
 
-        const Contract = await ethers.getContractFactory("Contract");
-        contract = await Contract.deploy();
-        await contract.deployed();
+        const AttackerAddressProvider = await ethers.getContractFactory("AttackerAddressProvider");
+        attackerAddressProvider = await AttackerAddressProvider.deploy();
+        await attackerAddressProvider.deployed();
     });
 
     it("should be deployed", async function () {

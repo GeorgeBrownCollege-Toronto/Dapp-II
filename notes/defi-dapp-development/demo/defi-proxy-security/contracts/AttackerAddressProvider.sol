@@ -5,7 +5,7 @@ interface IPool {
   function initialize(address) external;
 }
 
-contract Contract {
+contract AttackerAddressProvider {
   IPool pool = IPool(0x987115C38Fd9Fd2aA2c6F1718451D167c13a3186);
 
   constructor() {
